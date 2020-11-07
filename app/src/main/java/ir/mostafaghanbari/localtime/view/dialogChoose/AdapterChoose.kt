@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ir.mostafaghanbari.localtime.R
-import ir.mostafaghanbari.localtime.model.models.StateModel
+import ir.mostafaghanbari.localtime.models.StateModel
 import kotlinx.android.synthetic.main.item_choose.view.*
 
 class AdapterChoose(
-    private val data: ArrayList<StateModel>,
+    private val data: List<StateModel>,
     private val ctx: Context,
     private val listener:(state:StateModel) -> Unit
 ) : RecyclerView.Adapter<AdapterChoose.MyHolder>() {

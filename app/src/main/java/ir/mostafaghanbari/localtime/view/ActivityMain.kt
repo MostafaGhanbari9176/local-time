@@ -7,42 +7,28 @@ import android.os.Bundle
 import androidx.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.transition.ChangeBounds
 import androidx.transition.Fade
 import androidx.transition.TransitionSet
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 import ir.mostafaghanbari.localtime.R
-import ir.mostafaghanbari.localtime.model.models.StateModel
+import ir.mostafaghanbari.localtime.controllers.States
+import ir.mostafaghanbari.localtime.models.StateModel
 import ir.mostafaghanbari.localtime.view.dialogChoose.DialogChoose
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ActivityMain : AppCompatActivity() {
 
-    private val countries = ArrayList<StateModel>().apply {
-        add(StateModel(0, "America"))
-        add(StateModel(0, "Germany"))
-        add(StateModel(0, "Spanish"))
-        add(StateModel(0, "France"))
-        add(StateModel(0, "Iran"))
-    }
-
-    private val cities = ArrayList<StateModel>().apply {
-        add(StateModel(1, "America", 0))
-        add(StateModel(1, "Germany", 0))
-        add(StateModel(1, "Spanish", 0))
-        add(StateModel(1, "France", 0))
-        add(StateModel(1, "Iran", 0))
-    }
+    private lateinit var selectedCountry: StateModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         startAnimations()
-
-        //setTransition()
 
         setUpButtons()
 
@@ -61,32 +47,67 @@ class ActivityMain : AppCompatActivity() {
 
     private fun setUpButtons() {
         btnChooseCountry.setOnClickListener {
-            showChooseDialog(countries)
+            getCountries()
         }
 
         btnChooseCity.setOnClickListener {
-            showChooseDialog(cities)
+            getCountryCities()
         }
     }
 
-    private fun showChooseDialog(data: ArrayList<StateModel>) {
+    private fun getCountries() {
+        States(object : States.StateListener {
+            override fun result(data: List<StateModel>) {
+                showChooseDialog(data)
+            }
+        }).getCountries()
+    }
+
+    private fun showChooseDialog(data: List<StateModel>) {
         DialogChoose(data, this) { state ->
-            if (state.parentId == -1)
-                getCountryCities(state)
-            else
-                getLocalTimeData(state)
+            setTransition()
+            if (state.parentId == -1) {
+                selectedCountry = state
+                resetViews(state)
+            } else
+                setUpLocalTimeData(state)
         }
     }
 
-    private fun getLocalTimeData(city: StateModel) {
-        setTransition()
+    private fun resetViews(state: StateModel) {
+        btnChooseCountry.text = state.name
+
+        btnChooseCity.apply {
+            visibility = View.VISIBLE
+            text = "Choose City"
+        }
+
+        RVClock.visibility = View.GONE
+
+    }
+
+    private fun setUpLocalTimeData(city: StateModel) {
+        btnChooseCity.text = city.name
         RVClock.visibility = View.VISIBLE
+
+        val timeZone = TimeZone.getTimeZone(city.timeZone)
+        val calendar = Calendar.getInstance(timeZone)
+
+        val simpleDateFormat = SimpleDateFormat("hh:mm", Locale.US)
+        simpleDateFormat.timeZone = timeZone
+
+        txtClock.text = simpleDateFormat.format(calendar.time)
+        txtPM_AM.text = if (calendar.get(Calendar.AM_PM) == Calendar.AM) "AM" else "PM"
+
         txtStateName.text = city.name
     }
 
-    private fun getCountryCities(country: StateModel) {
-        setTransition()
-        btnChooseCity.visibility = View.VISIBLE
+    private fun getCountryCities() {
+        States(object : States.StateListener {
+            override fun result(data: List<StateModel>) {
+                showChooseDialog(data)
+            }
+        }).getCities(selectedCountry)
     }
 
 

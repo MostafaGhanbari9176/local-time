@@ -7,11 +7,11 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import ir.mostafaghanbari.localtime.R
-import ir.mostafaghanbari.localtime.model.models.StateModel
+import ir.mostafaghanbari.localtime.models.StateModel
 import kotlinx.android.synthetic.main.dialog_choose.view.*
 
 class DialogChoose(
-    data: ArrayList<StateModel>,
+    data: List<StateModel>,
     ctx: Context,
     listener: (state: StateModel) -> Unit
 ) : Dialog(ctx) {
