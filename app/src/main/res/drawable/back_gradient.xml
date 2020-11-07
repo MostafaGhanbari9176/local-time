@@ -1,0 +1,56 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="90dp"
+            android:height="160dp"
+            android:viewportWidth="90"
+            android:viewportHeight="160">
+
+            <path
+                android:name="back1"
+                android:pathData="M0,0 h90 v160 H0 z">
+                <aapt:attr name="android:fillColor">
+                    <gradient
+                        android:centerColor="@color/primary"
+                        android:endColor="@color/primaryLight"
+                        android:endX="90"
+                        android:endY="160"
+                        android:startColor="@color/primaryDark"
+                        android:startX="0"
+                        android:startY="0" />
+                </aapt:attr>
+            </path>
+            <path
+                android:name="back2"
+                android:pathData="M0,0 h90 v160 H0 z">
+                <aapt:attr name="android:fillColor">
+                    <gradient
+                        android:centerColor="@color/primary"
+                        android:endColor="@color/primaryLight"
+                        android:endX="0"
+                        android:endY="160"
+                        android:startColor="@color/primaryDark"
+                        android:startX="90"
+                        android:startY="0" />
+                </aapt:attr>
+            </path>
+
+
+        </vector>
+    </aapt:attr>
+
+    <target android:name="back2">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="3000"
+                android:propertyName="fillAlpha"
+                android:repeatCount="infinite"
+                android:repeatMode="reverse"
+                android:valueFrom="0"
+                android:valueTo="1"
+                android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+
+</animated-vector>
