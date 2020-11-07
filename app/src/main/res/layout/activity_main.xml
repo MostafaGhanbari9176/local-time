@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="rtl"
-    android:id="@+id/mainView"
-    >
+    android:layoutDirection="ltr">
 
     <ImageView
         android:id="@+id/mainBack"
@@ -29,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="32dp"
-                android:scaleType="fitStart"
+                android:scaleType="fitEnd"
                 app:srcCompat="@drawable/ic_earth_clock" />
         </LinearLayout>
 
@@ -37,39 +36,91 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <ScrollView
-                android:id="@+id/mainScrollView"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/btnChooseCountry"
+                    style="@style/fab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="16dp"
+                    android:text="Choose Country"
+                    app:icon="@drawable/ic_flag" />
 
-                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/btnChooseCountry"
-                        style="@style/fab"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="انتخاب کشور"
-                        app:icon="@drawable/ic_flag" />
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:id="@+id/btnChooseCity"
+                    style="@style/fab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Choose City"
+                    android:visibility="gone"
+                    app:icon="@drawable/ic_building" />
+            </LinearLayout>
 
-                    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                        android:id="@+id/btnChooseCity"
-                        android:visibility="gone"
-                        style="@style/fab"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="انتخاب شهر"
-                        app:icon="@drawable/ic_building" />
+            <RelativeLayout
+                android:id="@+id/RVClock"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6">
 
-                </LinearLayout>
-            </ScrollView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/ic_word" />
+
+                <TextView
+                    android:layout_marginBottom="12dp"
+                    android:id="@+id/txtPM_AM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="PM"
+                    android:layout_toEndOf="@id/txtClock"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/txt_small"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtStateName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/txtPM_AM"
+                    android:padding="8dp"
+                    android:text="HONG KONG"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/txt_big"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/txtClock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:text="11:35"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/light"
+                    android:textSize="@dimen/txt_big"
+                    android:textStyle="bold"
+
+                    />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

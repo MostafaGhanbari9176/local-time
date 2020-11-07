@@ -55,7 +55,7 @@ class ActivityMain : AppCompatActivity() {
                 addTransition(Fade())
             }
 
-            TransitionManager.beginDelayedTransition(mainScrollView as ViewGroup, set)
+            TransitionManager.beginDelayedTransition(mainView as ViewGroup, set)
         }
     }
 
@@ -71,19 +71,20 @@ class ActivityMain : AppCompatActivity() {
 
     private fun showChooseDialog(data: ArrayList<StateModel>) {
         DialogChoose(data, this) { state ->
-            Toast.makeText(this@ActivityMain, state.name, Toast.LENGTH_SHORT).show()
             if (state.parentId == -1)
-                getCountryCities(state._id)
+                getCountryCities(state)
             else
-                getLocalTimeData(state._id)
+                getLocalTimeData(state)
         }
     }
 
-    private fun getLocalTimeData(_id: Int) {
-
+    private fun getLocalTimeData(city: StateModel) {
+        setTransition()
+        RVClock.visibility = View.VISIBLE
+        txtStateName.text = city.name
     }
 
-    private fun getCountryCities(_id: Int) {
+    private fun getCountryCities(country: StateModel) {
         setTransition()
         btnChooseCity.visibility = View.VISIBLE
     }

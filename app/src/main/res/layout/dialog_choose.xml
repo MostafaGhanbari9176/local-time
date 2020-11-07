@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="انصراف"
+                android:text="Cancel"
                 android:textColor="@color/onSurfaceText"
                 android:textStyle="bold" />
 

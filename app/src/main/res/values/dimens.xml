@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="card_corner">8dp</dimen>
+    <dimen name="txt_normal">@dimen/_12ssp</dimen>
+    <dimen name="txt_big">@dimen/_20ssp</dimen>
+    <dimen name="txt_small">@dimen/_8ssp</dimen>
 </resources>
